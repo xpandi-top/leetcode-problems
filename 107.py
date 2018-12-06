@@ -15,6 +15,7 @@ class Solution:
         mlist=[]
         if root==None:
             mlist=[]
+        else:
             temp = [root]
             ntemp = []
             child = []
