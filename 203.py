@@ -5,6 +5,12 @@ class ListNode:
         self.next = None
 
 
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
 class Solution:
     def removeElements(self, head, val):
         """
@@ -13,18 +19,18 @@ class Solution:
         :rtype: ListNode
         """
         prev = None
-        cur = ListNode(0)
-        cur.next = head
-        i = 0
-        while head:
-            if head.val == val and head != None:
-                prev = head
-                head = head.next
+        curr = head
+        while curr :
+            if curr.val == val:
+                if not prev:
+                    head = curr.next
+                else:
+                    prev.next = curr.next
             else:
-                print("c")
-                prev = head
-                head = head.next
-        return cur.next
+                prev = curr
+            curr = curr.next
+        return head
+            
 
     def LinkedListfromList(self, l):
         head = ListNode(l[0])
@@ -43,6 +49,6 @@ class Solution:
 
 
 s = Solution()
-head = s.LinkedListfromList([1, 2, 3, 4, 5])
-string = s.LinkedList2Str(head)
+head = s.LinkedListfromList([1])
+string = s.LinkedList2Str(s.removeElements(head, 2))
 print(string)
