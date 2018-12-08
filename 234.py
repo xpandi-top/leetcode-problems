@@ -4,7 +4,25 @@ class ListNode:
         self.val = x
         self.next = None
 
+
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
 class Solution:
+    def reverseLinkedList(self, head):
+        curr = head
+        prev = None
+        fast = None
+        while curr:
+            fast = curr.next
+            curr.next = prev
+            prev = curr
+            curr = fast
+        return prev
+
     def isPalindrome(self, head):
         """
         :type head: ListNode
@@ -16,22 +34,19 @@ class Solution:
         while curr:
             curr = curr.next
             i += 1
-        curr = head
 
         for j in range(i // 2):
             comp = comp.next
 
-        second_head = comp
-        for k in range(i - (i // 2)):
-            curr = comp
-            # print(self.LinkedList2Str(second_head))
-            comp = comp.next
-            print("compnext: ", comp.val)
-            if k == i - i // 2 - 1:
-                curr.next = None
-            comp.next = curr
-        print(self.LinkedList2Str(second_head))
-        return comp
+        comp = self.reverseLinkedList(comp)
+
+        while comp:
+            if comp.val == head.val:
+                comp = comp.next
+                head = head.next
+            else:
+                return False
+        return True
 
     def LinkedList2Str(self, head):
         contents = []
@@ -59,8 +74,7 @@ class Solution:
         return prev
 
 
-
 s = Solution()
-head = s.LinkedListfromList([1,2,3,4,5,6])
+head = s.LinkedListfromList([1, 2, 3, 4, 5, 6])
 print(s.LinkedList2Str(head))
 print(s.LinkedList2Str(s.hani_reverse_list(head)))
