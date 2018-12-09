@@ -1,3 +1,4 @@
+from collections import Counter
 class Solution(object):
 
     def canReorderDoubled(self, A):
@@ -6,12 +7,10 @@ class Solution(object):
         :rtype: bool
         """
         uniq = list(set(A))
-        uniq.sort()
-        countList = [A.count(i) for i in uniq]
-        dictionary = dict(zip(uniq, countList))
+        dictionary = Counter(A)
 
         while len(uniq):
-            comp1 = uniq[0]
+            comp1 = min(uniq)
             uniq.remove(comp1)
             if comp1 < 0:
                 comp2 = int(comp1 / 2)
@@ -37,5 +36,4 @@ class Solution(object):
         return True
 
 
-A = [-4, -6, -1, -2, -1, -1, -3, -8]
-print(Solution().canReorderDoubled(A))
+
